@@ -1,0 +1,28 @@
+https://stackoverflow.com/questions/69692842/error-message-error0308010cdigital-envelope-routinesunsupported
+    $env:NODE_OPTIONS = "--openssl-legacy-provider"
+
+
+Roteiro
+    Funcionário terá Id, IdEmpresa, Nome, Idade, Estado
+    Empresa terá Id,Estado, NomeEmpresa
+
+
+    Criar index mostrando lista de funcionário mostrando todos os dados com um legend por empresa
+        Criar a model de Funcionario
+        Controller de Funcionario e método Index
+        e a view usando Blade
+
+    Criar tela de cadastro para cadastrar funcionário
+        Criar método de create e store
+        Criar a view de cadas
+
+
+
+
+FUTURO:
+    Criar tela de cadastro de funcionários
+    Cada empresa só visualiza seu funcionário
+    Cada empresa só cadastra seu funcionário
+    Criar tela de Login
+    Fazer algum agrupamento de rotas
+    Melhorar rotas
