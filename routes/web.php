@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
+});*/
+
+Route::controller(EmployeeController::class)->group(function () {
+    Route::get('/', 'index')->name('employee.index')->middleware(\App\Http\Middleware\Autenticador::class);
+    Route::get('/novo-funcionario', 'create')->name('employee.create');
+    Route::post('/novo-funcionario', 'store')->name('employee.store');
+    Route::delete('/excluir-funcionario/{id}', 'destroy')->name('employee.delete');
+    Route::get('/atualizar-funcionario/{id}', 'edit')->name('employee.edit');
+    Route::post('/atualizar-funcionario', 'update')->name('employee.update');
 });
+
+Route::get('/login', [LoginController::class, 'index'])->name('login');

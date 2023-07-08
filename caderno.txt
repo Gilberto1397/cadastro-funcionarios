@@ -1,6 +1,13 @@
 https://stackoverflow.com/questions/69692842/error-message-error0308010cdigital-envelope-routinesunsupported
     $env:NODE_OPTIONS = "--openssl-legacy-provider"
 
+https://stackoverflow.com/questions/64925926/error-postcss-plugin-tailwindcss-requires-postcss-8
+    npm install tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
+
+https://laravel.com/docs/8.x/mix#tailwindcss
+
+https://tailwindcomponents.com/
+
 
 Roteiro
     Funcionário terá Id, IdEmpresa, Nome, Idade, Estado
@@ -17,8 +24,6 @@ Roteiro
         Criar a view de cadas
 
 
-
-
 FUTURO:
     Criar tela de cadastro de funcionários
     Cada empresa só visualiza seu funcionário
@@ -26,3 +31,27 @@ FUTURO:
     Criar tela de Login
     Fazer algum agrupamento de rotas
     Melhorar rotas
+    ---TRANSFORMAR O INPUT DE ESTADO NO CADASTRO EM SELECT
+    RELACIONAMENTO DE N X N COM ESTADO
+    Criar tela para visualizar os funcionários de determinada empresa e dizer se o funcionário está ativo ou não
+
+    Ver sobre o middleware can, para autorização
+
+    ADICIONAR COMENTÁRIOS NAS MODELS E SERVICES E RESOURCES(QUANDO TIVER)
+    PRATICAR MAIS O BULK INSERT E RELACIONADOS
+    SALVAR OS CHECKBOX
+
+    ------AO CRIAR AUTENTICAÇÃO MANUAL, NÃO ESQUECER DE USAR A FUNÇÃO QUE VERIFICA OS HASH USADO NO TREINO DE MVC
+
+
+DETALHES:
+    AGRUPADO POR CONTROLLER
+
+
+comparar o repository com os da DB
+ver a pasta Interface na DB
+As propriedades do request estão sendo acessadas magicamente
+
+TODO FAZER UPDATE
+arrumar store
+arrumar o validate dos checkbox e salvar eles
