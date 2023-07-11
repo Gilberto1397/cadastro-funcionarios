@@ -15,7 +15,6 @@ class LoginController extends Controller
 
     public function login(Request $r)
     {
-        dd($r);
         if (!Auth::attempt($r->only(['email', 'password']))) {
             return redirect()->route('login')->with('message', 'Usuário ou senha inválidos');
         }

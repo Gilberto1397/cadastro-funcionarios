@@ -15,25 +15,22 @@ Roteiro
 
 
     Criar index mostrando lista de funcionário mostrando todos os dados com um legend por empresa
-        Criar a model de Funcionario
-        Controller de Funcionario e método Index
-        e a view usando Blade
+        Criar a model de Funcionario - FEITO
+        Controller de Funcionario e método Index - FEITO
+        e a view usando Blade - FEITO
 
-    Criar tela de cadastro para cadastrar funcionário
-        Criar método de create e store
-        Criar a view de cadas
+    Criar tela de cadastro para cadastrar funcionário - FEITO
+        Criar método de create e store - FEITO
+        Criar a view de cadastro - FEITO
 
 
 FUTURO:
     Cada empresa só visualiza seu funcionário
     Cada empresa só cadastra seu funcionário
-    Melhorar rotas
     ---TRANSFORMAR O INPUT DE ESTADO NO CADASTRO EM SELECT
     RELACIONAMENTO DE N X N COM ESTADO
     Criar tela para visualizar os funcionários de determinada empresa e dizer se o funcionário está ativo ou não
     Fazer a validação dos POST
-
-    Ver sobre o middleware can, para autorização
 
     ADICIONAR COMENTÁRIOS NAS MODELS E SERVICES E RESOURCES(QUANDO TIVER)
     PRATICAR MAIS O BULK INSERT E RELACIONADOS
@@ -41,6 +38,9 @@ FUTURO:
 
     ------AO CRIAR AUTENTICAÇÃO MANUAL, NÃO ESQUECER DE USAR A FUNÇÃO QUE VERIFICA OS HASH USADO NO TREINO DE MVC
 
+    arrumar os botoes da navbar
+    Ver sobre o middleware can, para autorização - para empresas não acessarem todos os funcionários
+    Melhorar rotas
 
 comparar o repository com os da DB
 ver a pasta Interface na DB

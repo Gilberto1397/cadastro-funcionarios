@@ -17,10 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-
 Route::controller(EmployeeController::class)->middleware(Autenticador::class)->group(function () {
     Route::get('/', 'index')->name('employee.index');
     Route::get('/novo-funcionario', 'create')->name('employee.create');

@@ -17,6 +17,7 @@ class Company extends Model
     protected $table = 'companies';
     protected $primaryKey = 'id';
     public $timestamps = false;
+    protected $fillable = ['name', 'state'];
 
     public function employees()
     {
