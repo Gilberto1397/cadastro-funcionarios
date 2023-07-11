@@ -25,15 +25,13 @@ Roteiro
 
 
 FUTURO:
-    Criar tela de cadastro de funcionários
     Cada empresa só visualiza seu funcionário
     Cada empresa só cadastra seu funcionário
-    Criar tela de Login
-    Fazer algum agrupamento de rotas
     Melhorar rotas
     ---TRANSFORMAR O INPUT DE ESTADO NO CADASTRO EM SELECT
     RELACIONAMENTO DE N X N COM ESTADO
     Criar tela para visualizar os funcionários de determinada empresa e dizer se o funcionário está ativo ou não
+    Fazer a validação dos POST
 
     Ver sobre o middleware can, para autorização
 
@@ -44,14 +42,10 @@ FUTURO:
     ------AO CRIAR AUTENTICAÇÃO MANUAL, NÃO ESQUECER DE USAR A FUNÇÃO QUE VERIFICA OS HASH USADO NO TREINO DE MVC
 
 
-DETALHES:
-    AGRUPADO POR CONTROLLER
-
-
 comparar o repository com os da DB
 ver a pasta Interface na DB
 As propriedades do request estão sendo acessadas magicamente
 
-TODO FAZER UPDATE
+TODO FAZER UPDATE DE EMPRESA
 arrumar store
 arrumar o validate dos checkbox e salvar eles
