@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class EloquentEmployeeRepository implements EmployeeRepositoryInterface
 {
-    public function index()
+    public function index($userId)
     {
-        return Employee::with('company')->get();
+        return Employee::with('company')->where('companies_id', $userId)->get();
     }
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request, $userId)
     {
         try {
             DB::beginTransaction();
@@ -21,7 +21,7 @@ class EloquentEmployeeRepository implements EmployeeRepositoryInterface
             $employee->name = $request->name;
             $employee->age = $request->age;
             $employee->state = $request->state;
-            $employee->companies_id = $request->company;
+            $employee->companies_id = $userId;
             $employee->save();
         } catch (\Exception $e){
             DB::rollBack();

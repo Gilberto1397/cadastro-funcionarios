@@ -25,20 +25,21 @@ Roteiro
 
 
 FUTURO:
-    Cada empresa só visualiza seu funcionário
-    Cada empresa só cadastra seu funcionário
+    Cada empresa só visualiza seu funcionário - FEITO
+    Cada empresa só cadastra seu funcionário - FEITO
+    ADICIONAR COMENTÁRIOS NAS MODELS E SERVICES E RESOURCES(QUANDO TIVER)
     ---TRANSFORMAR O INPUT DE ESTADO NO CADASTRO EM SELECT
     RELACIONAMENTO DE N X N COM ESTADO
-    Criar tela para visualizar os funcionários de determinada empresa e dizer se o funcionário está ativo ou não
+    dizer se o funcionário está ativo ou não
     Fazer a validação dos POST
 
-    ADICIONAR COMENTÁRIOS NAS MODELS E SERVICES E RESOURCES(QUANDO TIVER)
     PRATICAR MAIS O BULK INSERT E RELACIONADOS
     SALVAR OS CHECKBOX
 
     ------AO CRIAR AUTENTICAÇÃO MANUAL, NÃO ESQUECER DE USAR A FUNÇÃO QUE VERIFICA OS HASH USADO NO TREINO DE MVC
 
     arrumar os botoes da navbar
+    Criar tela para visualizar os funcionários de determinada empresa
     Ver sobre o middleware can, para autorização - para empresas não acessarem todos os funcionários
     Melhorar rotas
 
@@ -47,5 +48,5 @@ ver a pasta Interface na DB
 As propriedades do request estão sendo acessadas magicamente
 
 TODO FAZER UPDATE DE EMPRESA
-arrumar store
+arrumar store do repository de employe
 arrumar o validate dos checkbox e salvar eles

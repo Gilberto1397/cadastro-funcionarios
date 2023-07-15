@@ -30,7 +30,7 @@ class Employee extends Model
     protected static function booted()
     {
         self::addGlobalScope(static function (Builder $query) {
-            return $query->orderBy('id', 'desc');
+            return $query->orderBy('id');
         });
     }
 

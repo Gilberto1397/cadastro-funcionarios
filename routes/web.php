@@ -24,7 +24,9 @@ Route::controller(EmployeeController::class)->middleware(Autenticador::class)->g
     Route::delete('/excluir-funcionario/{id}', 'destroy')->name('employee.delete');
     Route::get('/atualizar-funcionario/{id}', 'edit')->name('employee.edit');
     Route::post('/atualizar-funcionario', 'update')->name('employee.update');
+    Route::get('/recupera-usuario', 'recuperaUsuario');
 });
+
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.login');

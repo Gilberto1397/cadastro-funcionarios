@@ -9,7 +9,7 @@
             @csrf
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Nome</label>
-                <input
+                <input id="name"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
                     type="text" id="name" name="name" value="{{$employee->name ?? ''}}">
                 @if($errors->has('name'))
@@ -18,7 +18,7 @@
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="age">Idade</label>
-                <input
+                <input id="age"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
                     type="text" id="age" name="age" value="{{$employee->age ?? ''}}">
                 @if($errors->has('age'))
@@ -27,25 +27,18 @@
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="state">Estado</label>
-                <input
+                <input id="state"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
                     type="text" id="state" name="state" value="{{$employee->state ?? ''}}">
                 @if($errors->has('state'))
                     {{$errors->first('state')}}
                 @endif
             </div>
+
             <div class="mb-4">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Empresa</label>
-                <select name="company"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option> Escolha uma empresa</option>
-                    @foreach($companies as $company)
-                        <option {{ (isset($employee->companies_id) && $employee->companies_id == $company->id) ? 'selected' : '' }} value="{{$company->id}}">{{$company->name}}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('company'))
-                    {{$errors->first('age')}}
-                @endif
+                <label class="block text-gray-700 text-sm font-bold mb-2">Empresa</label>
+                <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                        type="text" id="companyName" disabled {{--value="{{$user->name ?? ''}}"--}} style="background-color: #59bd79">
             </div>
 
             <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Stacks</h3>
@@ -76,10 +69,66 @@
                 </li>
             </ul>
 
-            <button
+            <button id="salvarBtn"
                 class="mt-5 w-full bg-indigo-500 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-indigo-600 transition duration-300"
                 type="submit">{{!empty($employee->id) ? 'Atualizar' : 'Salvar'}}
             </button>
         </form>
     </div>
+
+    <script>
+        const btn = document.getElementById('salvarBtn');
+        btn.addEventListener('click', salvar);
+
+        window.onload = function() {
+            getRequest();
+        };
+
+        async function getRequest() {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/recupera-usuario');
+                if (!response.ok) {
+                    throw new Error('Erro ao fazer a requisição GET.');
+                }
+                const data = await response.json();
+                console.log(data)
+                document.getElementById('companyName').value = data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        async function salvar() {
+            event.preventDefault();
+            const name = document.getElementById('name');
+            const age = document.getElementById('age');
+            const state = document.getElementById('state');
+
+            let data = {
+                name: name.value,
+                age: age.value,
+                state: state.value,
+                _token: '{{ csrf_token() }}'
+            };
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            };
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/novo-funcionario', options)
+                if (!response.ok) {
+                    throw new Error('Erro ao fazer a requisição POST.');
+                }
+                const res = await response.json();
+                console.log(res);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    </script>
 @endsection

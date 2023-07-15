@@ -26,8 +26,7 @@ class StoreRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'min:3'],
             'age' => ['required', 'integer'],
-            'state' => ['required', 'string'],
-            'company' => ['required', 'exists:App\Models\Company,id'],
+            'state' => ['required', 'string']
         ];
 
         //'stacks.*' => ['string'],
@@ -37,8 +36,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'required' => 'O campo :attribute é obrigatório',
-            'min' => 'O campo :attribute deve ter no mínimo :min caracteres',
-            'exists' => 'A empresa marcada não é válida'
+            'min' => 'O campo :attribute deve ter no mínimo :min caracteres'
         ];
     }
 }

@@ -5,12 +5,18 @@
             <ul class="hidden items-center gap-6 lg:flex">
                 @auth()
                     <li class="block p-1 font-sans text-sm font-normal leading-normal text-inherit antialiased">
+                        <a href="{{route('employee.index')}}" class="flex items-center">Home</a>
+                    </li>
+                    <li class="block p-1 font-sans text-sm font-normal leading-normal text-inherit antialiased">
                         <form action="{{route('login.logout')}}" method="post">
                             @csrf
                             <button class="flex items-center">
                                 LOGOUT
                             </button>
                         </form>
+                    </li>
+                    <li class="block p-1 font-sans text-sm font-normal leading-normal text-inherit antialiased">
+                        <a href="{{route('employee.create')}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">&#43; Novo Funcionário</a>
                     </li>
                 @endauth
                 @guest()

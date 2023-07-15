@@ -18,35 +18,43 @@ class EmployeeController extends Controller
     }
     public function index()
     {
-        $employees = $this->repository->index();
+        $userId = auth()->user()->getAuthIdentifier();
+        $employees = $this->repository->index($userId);
         $message = session('message');
         return view('employee.index', compact(['employees', 'message']));
     }
 
     public function create(Request $r)
     {
-        //dd($r);
+        $user = auth()->user();
         $companies = Company::all();
-        return view('employee.form', compact('companies'));
+        return view('employee.form', compact(['companies', 'user']));
     }
 
     public function store(StoreRequest $request)
     {
-        $newEmployee = $this->repository->store($request);
+        $userId = auth()->user()->getAuthIdentifier();
+        $newEmployee = $this->repository->store($request, $userId);
+        $resposta = new \stdClass();
 
         if (!$newEmployee) {
-            session()->flash('message', 'Erro ao criar usuário');
+            $resposta->devolvendo = 'Erro ao salvar';
+            session()->flash('message', 'Erro ao criar funcionário');
             return redirect()->route('employee.index');
         }
-        session()->flash('message', 'Funcionário criado!!!');
-        return redirect()->route('employee.index');
+
+        $resposta->devolvendo = 'GRAVOU O DADO';
+        return response()->json($resposta);
+
+        /*session()->flash('message', 'Funcionário criado!!!');
+        return redirect()->route('employee.index');*/
     }
 
     public function edit($employee)
     {
         $employee = Employee::find($employee);
-        $companies = Company::all();
-        return view('employee.form', compact(['employee', 'companies']));
+        $user = $employee->company;
+        return view('employee.form', compact(['employee', 'user']));
     }
 
     public function update(Request $request)
@@ -67,5 +75,12 @@ class EmployeeController extends Controller
         $employee = Employee::destroy($id);
         session()->flash('message', 'Funcionário excluído');
         return redirect()->route('employee.index');
+    }
+
+    public function recuperaUsuario()
+    {
+        $user = auth()->user();
+        $userName = $user->name;
+        return response()->json($userName);
     }
 }
