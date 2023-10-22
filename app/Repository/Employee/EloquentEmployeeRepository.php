@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\Employee;
 
-use App\Http\Requests\StoreRequest;
+use App\Http\Requests\EmployeeRequest;
 use App\Models\Employee;
 use Illuminate\Support\Facades\DB;
 
@@ -12,7 +12,7 @@ class EloquentEmployeeRepository implements EmployeeRepositoryInterface
     {
         return Employee::with('company')->where('companies_id', $userId)->get();
     }
-    public function store(StoreRequest $request, $userId)
+    public function store(EmployeeRequest $request, $userId)
     {
         try {
             DB::beginTransaction();

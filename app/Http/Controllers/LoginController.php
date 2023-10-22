@@ -2,20 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Service\LoginService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    protected LoginService $loginService;
+
+    public function __construct()
+    {
+        $this->loginService = new LoginService();
+    }
+
     public function index()
     {
-        $message = session('message');
+        $message = $this->loginService->index();
         return view('login.index', compact('message'));
     }
 
     public function login(Request $r)
     {
-        if (!Auth::attempt($r->only(['email', 'password']))) {
+        $authentication = $this->loginService->login($r);
+        if (!$authentication) {
             return redirect()->route('login')->with('message', 'Usuário ou senha inválidos');
         }
 
@@ -24,7 +33,7 @@ class LoginController extends Controller
 
     public function logout()
     {
-        Auth::logout();
+        $this->loginService->logout();
         return redirect()->route('login');
     }
 }

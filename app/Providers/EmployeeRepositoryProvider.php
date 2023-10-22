@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Repository\EloquentEmployeeRepository;
-use App\Repository\EmployeeRepositoryInterface;
+use App\Repository\Employee\EloquentEmployeeRepository;
+use App\Repository\Employee\EmployeeRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class EmployeeRepositoryProvider extends ServiceProvider

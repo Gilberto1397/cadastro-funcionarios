@@ -2,26 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Http\Requests\UserFormRequest;
+use App\Http\Service\UserService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    protected UserService $userService;
+
+    public function __construct()
+    {
+        $this->userService = new UserService();
+    }
+
     public function create()
     {
         return view('user.create');
     }
 
-    public function store(Request $r)
+    public function store(UserFormRequest $r)
     {
-        $data = $r->except(['_token']);
-        $data['password'] = Hash::make($data['password']);
-
-        $user = User::create($data);
-        Auth::login($user);
-        return redirect()->route('employee.index')->with('message','Usuário criado!!!');
+        $user = $this->userService->store();
+        return redirect()->route('employee.index')->with('message',"Usuário {$user->name} criado!!!");
 
     }
 }

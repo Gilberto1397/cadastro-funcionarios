@@ -2,62 +2,60 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreRequest;
+use App\Http\Requests\EmployeeRequest;
+use App\Http\Service\EmployeeService;
 use App\Models\Company;
 use App\Models\Employee;
-use App\Repository\EmployeeRepositoryInterface;
+use App\Repository\Employee\EmployeeRepositoryInterface;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
     protected $repository;
+    protected EmployeeService $employeeService;
 
     public function __construct(EmployeeRepositoryInterface $repository)
     {
-        $this->repository = $repository;
+        $this->employeeService = new EmployeeService();
     }
+
     public function index()
     {
-        $userId = auth()->user()->getAuthIdentifier();
-        $employees = $this->repository->index($userId);
-        $message = session('message');
+        $dados = $this->employeeService->index();
+        $employees = $dados['employees'];
+        $message = $dados['message'];
         return view('employee.index', compact(['employees', 'message']));
     }
 
-    public function create(Request $r)
+    public function create()
     {
-        $user = auth()->user();
-        $companies = Company::all();
+        $dados = $this->employeeService->create();
+        $companies = $dados['companies'];
+        $user = $dados['user'];
         return view('employee.form', compact(['companies', 'user']));
     }
 
-    public function store(StoreRequest $request)
+    public function store(EmployeeRequest $request)
     {
-        $userId = auth()->user()->getAuthIdentifier();
-        $newEmployee = $this->repository->store($request, $userId);
-        $resposta = new \stdClass();
+        $newEmployee = $this->employeeService->store($request);
 
         if (!$newEmployee) {
-            $resposta->devolvendo = 'Erro ao salvar';
             session()->flash('message', 'Erro ao criar funcionário');
             return redirect()->route('employee.index');
         }
 
-        $resposta->devolvendo = 'GRAVOU O DADO';
-        return response()->json($resposta);
-
-        /*session()->flash('message', 'Funcionário criado!!!');
-        return redirect()->route('employee.index');*/
+        return redirect()->route('employee.index');
     }
 
     public function edit($employee)
     {
-        $employee = Employee::find($employee);
-        $user = $employee->company;
+        $dados = $this->employeeService->edit($employee);
+        $employee = $dados['employee'];
+        $user = $dados['user'];
         return view('employee.form', compact(['employee', 'user']));
     }
 
-    public function update(Request $request)
+    public function update(Request $request) // continuar daqui
     {
         $employee = Employee::find($request->employee);
         $employee->name = $request->name;
